@@ -1,10 +1,7 @@
-import logging
-import sys
 import aioredis
 from fastapi import FastAPI
 
 from src.config import Config, Redis
-from src.models.system import LogLevel
 
 
 class ContainerGeneral:
@@ -12,8 +9,6 @@ class ContainerGeneral:
         self.__app = FastAPI()
         self.__config = Config()
         self.__redis = self.__init_redis()
-        # self.logging = self.__logger
-        # self.__logger = self.logging.Logger()
 
     @property
     def app(self) -> FastAPI:
@@ -34,26 +29,3 @@ class ContainerGeneral:
             encoding='utf8',
             decode_responces=True
         )
-
-    # @property
-    # def logger(self) -> logging.Logger:
-    #     if self.__logger is None:
-    #         log_levels = {
-    #             'DEBUG': logging.DEBUG,
-    #             'INFO': logging.INFO,
-    #             'WARNING': logging.WARNING,
-    #             'ERROR': logging.ERROR
-    #         }
-    #         log_level = log_levels[LogLevel.value.upper()]
-    #         self.__logger = logging.getLogger('game_crawler_logger')
-    #         self.__logger.setLevel(log_levels['INFO'])
-    #         lc = logging.StreamHandler(sys.stdout)
-    #         lc.setLevel(log_level)
-    #         lc.setFormatter(
-    #             logging.Formatter(
-    #                 '[%(asctime)s][%(levelname)s]:%(message)s',
-    #                 datefmt='%d/%m/%Y%H:%M:%S'
-    #             )
-    #         )
-    #         self.__logger.addHandler(lc)
-    #     return self.__logger
